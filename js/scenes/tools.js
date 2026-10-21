@@ -100,11 +100,11 @@ FD.add({
       const out = $('#out');
       if (type === 'images') {
         const list = IMG.filter(([, , sz, c, ty, r]) => ok('size', sz) && ok('colour', c) && ok('kind', ty) && (ok('rights', r) || (F.rights === 'share' && r === 'commercial')));
-        out.innerHTML = `<p class="small muted">${list.length} images</p><div class="tl-imgs">${list.map(([e, cap, sz, c, ty, r]) => `
-          <figure class="tl-img sz-${sz} ty-${ty}" style="--tc:${COL[c]}"><span>${e}</span><figcaption>${cap}<small>${sz} · ${ty === 'line' ? 'line drawing' : ty === 'clipart' ? 'clip art' : ty}${r !== 'none' ? ` · ${r === 'share' ? 'free to share' : 'free to modify'}` : ''}</small></figcaption></figure>`).join('') || '<p class="note">No images match all these filters.</p>'}</div>`;
+        out.innerHTML = `<p class="small muted">${list.length} image${list.length === 1 ? '' : 's'}</p><div class="tl-imgs">${list.map(([e, cap, sz, c, ty, r]) => `
+          <figure class="tl-img sz-${sz} ty-${ty}" style="--tc:${COL[c]}"><span><i>${e}</i></span><figcaption>${cap}<small>${sz} · ${ty === 'line' ? 'line drawing' : ty === 'clipart' ? 'clip art' : ty}${r !== 'none' ? ` · ${r === 'share' ? 'free to share' : 'free to modify'}` : ''}</small></figcaption></figure>`).join('') || '<p class="note">No images match all these filters.</p>'}</div>`;
       } else if (type === 'web') {
         const list = WEB.filter(([, , d, c]) => (!F.time || F.time === 'any' || d <= +F.time) && ok('region', c));
-        out.innerHTML = `<p class="small muted">${list.length} results</p><ol class="se-res">${list.map(([t, s, d, c]) => `<li class="new"><span class="small good-t">${s}</span><b class="se-rt">${t}</b><span class="small muted">${d === 0 ? 'Today' : d < 30 ? d + ' days ago' : d < 365 ? Math.round(d / 30) + ' months ago' : Math.round(d / 365) + ' years ago'} · ${c}</span></li>`).join('') || '<li class="note">No results match these filters.</li>'}</ol>`;
+        out.innerHTML = `<p class="small muted">${list.length} result${list.length === 1 ? '' : 's'}</p><ol class="se-res">${list.map(([t, s, d, c]) => `<li class="new"><span class="small good-t">${s}</span><b class="se-rt">${t}</b><span class="small muted">${d === 0 ? 'Today' : d < 30 ? d + ' days ago' : d < 365 ? Math.round(d / 30) + ' months ago' : Math.round(d / 365) + ' years ago'} · ${c}</span></li>`).join('') || '<li class="note">No results match these filters.</li>'}</ol>`;
       } else if (type === 'videos') {
         out.innerHTML = `<div class="tl-imgs">${['Kitten learns to jump · 2:14', 'How to brush a cat · 5:02', 'Big cats documentary · 48:30'].map((t) => `<figure class="tl-img ty-video" style="--tc:#343a40"><span>▶️</span><figcaption>${t}</figcaption></figure>`).join('')}</div>`;
       } else if (type === 'news') {
