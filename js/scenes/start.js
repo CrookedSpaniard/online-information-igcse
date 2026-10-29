@@ -48,6 +48,7 @@ FD.add({
       </section>
 
       <div class="st-cols">${part('A')}${part('B')}</div>
+      <p class="small muted">Want to repeat the unit from zero? <button class="link-btn danger" id="sReset">↺ Reset my progress</button></p>
       <p class="small muted">Your progress is saved in this browser only. Nothing is sent to the internet. The search engine, websites, people and articles in the simulations are made up: no real search is done.</p>`;
     const $ = (s) => el.querySelector(s);
     $('#sName').addEventListener('input', (e) => { FD.state.name = e.target.value; FD.save(); });
@@ -57,6 +58,7 @@ FD.add({
       else FD.goto('sources');
     });
     $('#sProg').addEventListener('click', FD.openProgress);
+    $('#sReset').addEventListener('click', () => FD.openProgress('reset'));
     el.querySelectorAll('[data-go]').forEach((b) => b.addEventListener('click', () => FD.goto(b.dataset.go)));
   },
 });
